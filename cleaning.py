@@ -13,3 +13,4 @@ to eliminate duplicate rows.
 customer_data is equal to data.groupby('CustomerID'). agg({ 'PurchaseAmount': 'sum', 'ProductID': 'count', 'Category': lambda x: x.mode()[0] }). reset_index()  
 # Step 6: Print the outcome 
 (customer_data.head());
+
