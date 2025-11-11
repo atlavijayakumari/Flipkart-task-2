@@ -1,34 +1,20 @@
 import pandas as pd
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as p
-df = pd.read_csv("sample_transactions.csv")
-if 'TotalSpend' not in df.columns and 'PurchaseAmount' in df.columns:
-    df.rename(columns={'PurchaseAmount': 'TotalSpend'}, inplace=True)
-if 'PurchaseCounCustomerID' in df.columns:
-    df['PurchaseCount'] = df.groupby('CustomerID')['ProductID'].transform('coun
-X = df[['TotalSpend', 'PurchaseCount']]
-kmeans = KMeans(n_clusters=3, random_state=42)
-df['Segment'] = kmeans.fit_predict(X)
-names = {0: 'Low Spenders', 1: 'Average Spenders', 2: 'High Spenders'}
-df['SegmentName'] = df['Segment'].map(names)
-df.to_csv("segmented_customers.csv", index=False)
-print("\n✅ Segmentation completed → segmented_customers.c
-# Bar chart – number of customers per segment
-df['SegmentName'].value_counts().plot(kind='bar', color=['skyblue', 'orange', 'lightgreen'])
-plt.title('Customer Segments Count')
-plt.xlabel('Segment Type')
-plt.ylabel('Number of Customers')
-plt.tight_layout()
-plt.savefig("segmented_bar_chart.png")
-plt.close()
-plt.scatter(df['TotalSpend'], df['PurchaseCount'], c=df['Segment'], cmap='viridis', s=60)
-plt.title('Customer Segmentation Visualization')
-plt.xlabel('Total Spend')
-plt.ylabel('Purchase Count')
-plt.tight_layout()
-plt.savefig("segmented_scatter_plot.png")
-plt.close()
-rint("\n📊 Visualizations automatically saved:")
-print("   • segmented_bar_chart.png")
-print("   • segmented_scatter_plot.png")
-
+import matplotlib.pyplot a
+d = pd.read_csv("sample_transactions.c
+if 'PurchaseAmount' in d:
+    d['TotalSpend'] = d['PurchaseAmou
+d['BuyCount'] = d.groupby('CustomerID')['ProductID'].transform('count')
+x = d[['TotalSpend','BuyCount']].dropn
+km = KMeans(3, random_state=1)
+d.loc[x.index,'Grp'] = km.fit_predict(x
+d['Name'] = d['Grp'].map({0:'Low',1:'Mid',2:'High'
+print("saved out.csv
+d['Name'].value_counts().plot.bar(color='pink')
+plt.title("Group Sizes")
+plt.savefig("bar.jpg")
+plt.clos(d['TotalSpend'],d['BuyCount'],c=d['Grp'],cmap='cool')
+plt.xlabel("Spend")
+plt.ylabel("Count")
+plt.title("Groups")
+print("bar.jpg and pic.jpg ready")
